@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Voice Assistant</title>
+    <style>
+        /* CSS for Milky Way animation */
+        body {
+            margin: 0;
+            overflow: hidden;
+            background-color: #000; /* Set background color to black */
+        }
+        #milky-way {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://t3.ftcdn.net/jpg/07/00/91/30/360_F_700913020_lddqcGHssAKJPDzcfYz8I5pFa8vLieHJ.jpg'); /* Replace 'milky_way.jpg' with your image */
+            animation: milkyWayScroll 60s linear infinite;
+        }
+        @keyframes milkyWayScroll {
+            0% { background-position: 0 0; }
+            100% { background-position: 100% 0; }
+        }
+
+        /* CSS for centered text and animations */
+        .container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: #fff;
+            font-family: Arial, sans-serif;
+            animation: fadeIn 2s ease-in-out;
+        }
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease-in-out;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        h1 {
+            font-size: 36px; /* Increase font size for better visibility */
+            margin-bottom: 20px; /* Add some margin below the heading */
+        }
+    </style>
+</head>
+<body>
+    <!-- Milky Way animation -->
+    <div id="milky-way"></div>
+
+    <!-- Voice Assistant content -->
+    <div class="container">
+        <h1>FRIDAY A.I.</h1>
+        <button onclick="startListening()">Start Listening</button>
+        <p id="output"></p>
+    </div>
+
+    <!-- JavaScript for fetching voice input -->
+    <script>
+        function startListening() {
+            // Implement logic to initiate voice input and display the result
+            // Update the content of the 'output' element
+            fetch('/get_voice_input', {
+                method: 'POST'
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('output').innerText = 'Voice Input: ' + data.text;
+            })
+            .catch(error => console.error('Error:', error));
+        }
+    </script>
+</body>
+</html>
